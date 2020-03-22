@@ -65,12 +65,6 @@ function test_help(){
     assertCommandSuccess main --help
     assertEquals "usage" "$(cat $STDOUTF)"
 }
-function test_version(){
-    assertCommandSuccess main -V
-    assertEquals "$NAME $(cat $GROOT_BASE/VERSION)" "$(cat $STDOUTF)"
-    assertCommandSuccess main --version
-    assertEquals "$NAME $(cat $GROOT_BASE/VERSION)" "$(cat $STDOUTF)"
-}
 function test_groot_no_root(){
     is_user_root() {
         return 1

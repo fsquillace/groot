@@ -6,7 +6,6 @@
 
 set -e
 
-GROOT_BASE="$(readlink -f $(dirname $(readlink -f "$0"))/..)"
 NAME='GRoot'
 CMD='groot'
 DESCRIPTION="I am $NAME!"
@@ -276,7 +275,7 @@ function create_node() {
 
 function usage() {
   cat <<EOF
-$NAME (v$(cat $GROOT_BASE/VERSION)): $DESCRIPTION
+$NAME: $DESCRIPTION
 
 Usage:
     $CMD [options] [<chroot-dir> [command]]
@@ -306,15 +305,9 @@ Options:
 
     -h, --help                Print this help message
 
-    -V, --version             Show the $NAME version
-
 If 'command' is unspecified, $CMD will launch $SHELL.
 
 EOF
-}
-
-version() {
-    echo -e "$NAME $(cat $GROOT_BASE/VERSION)"
 }
 
 function parse_arguments() {
@@ -324,7 +317,6 @@ function parse_arguments() {
     OPT_BIND="--bind"
     OPT_AVOID_BIND=false
     OPT_HELP=false
-    OPT_VERSION=false
     for opt in "$@"
     do
         case "$1" in
@@ -333,7 +325,6 @@ function parse_arguments() {
             -r|--recursive) OPT_BIND="--rbind" ; shift ;;
             -i|--avoid-bind) OPT_AVOID_BIND=true ; shift ;;
             -h|--help) OPT_HELP=true ; shift ;;
-            -V|--version) OPT_VERSION=true ; shift ;;
             -*) die "Invalid option $1" ;;
             *) break ;;
         esac
@@ -357,7 +348,6 @@ function is_user_root() {
 
 function execute_operation() {
     $OPT_HELP && usage && return
-    $OPT_VERSION && version && return
 
     is_user_root || die_on_status $NO_ROOT_PRIVILEGES 'This script must be run with root privileges'
 

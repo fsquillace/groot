@@ -1,0 +1,13 @@
+language: bash
+
+sudo: required
+
+install:
+  - PATH=$PWD/bin:$PATH
+
+script:
+  - bash --version
+  - bash ./tests/checkstyle/checkstyle.sh
+  - bash ./tests/unit-tests/unit-tests.sh
+
+  - sudo $PWD/bin/groot -b /dev -b /proc -b /run -b /sys -b /tmp -n / bash -c "echo Running GRoot!"
