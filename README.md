@@ -2,6 +2,10 @@ GRoot
 ======
 I am GRoot! Yet another enhanced chroot command with mounting capabilities.
 
+|Project Status|Donation|
+|:------------:|:------:|
+| [![Build status](https://api.travis-ci.org/fsquillace/groot.png?branch=master)](https://travis-ci.org/fsquillace/groot) | [![Github Sponsors](https://img.shields.io/badge/GitHub-Sponsors-orange.svg)](https://github.com/sponsors/fsquillace) [![PayPal](https://img.shields.io/badge/PayPal-Donation-blue.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8LEHQKBCYTACY) |
+
 **Table of Contents**
 - [Description](#description)
 - [Quickstart](#quickstart)
