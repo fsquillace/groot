@@ -187,10 +187,10 @@ function chroot_teardown() {
     do
         if [[ $mp =~ ^${normalized_chrootdir}.* ]] && is_mountpoint "$mp"
         then
-            $UMOUNT $mp || final_res=$?
+            $UMOUNT --force $mp || final_res=$?
         fi
     done
-    $UMOUNT ${CHROOTDIR%/}
+    $UMOUNT --force ${CHROOTDIR%/}
 
     return $final_res
 }

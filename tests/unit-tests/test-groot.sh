@@ -140,38 +140,38 @@ function test_groot_with_chroot_teardown(){
     echo -e "1 /home/mychroot/dev\n1 /home/mychroot/proc/fs1\n1 /home/mychroot\n1 /home/mychroot-no/dev\n1 /home/mychroot/dev/shm\n1 /home/mychroot/proc\n" > ./mounts
     MOUNTS_FILE=./mounts
     CHROOTDIR=/home/mychroot assertCommandSuccess chroot_teardown
-    assertEquals "$(echo -e "umount(/home/mychroot/proc/fs1)
-umount(/home/mychroot/proc)
-umount(/home/mychroot/dev/shm)
-umount(/home/mychroot/dev)
-umount(/home/mychroot)")" "$(cat $STDOUTF)"
+    assertEquals "$(echo -e "umount(--force /home/mychroot/proc/fs1)
+umount(--force /home/mychroot/proc)
+umount(--force /home/mychroot/dev/shm)
+umount(--force /home/mychroot/dev)
+umount(--force /home/mychroot)")" "$(cat $STDOUTF)"
 }
 
 function test_groot_with_chroot_teardown_umount_failure(){
     function umount() {
         echo "umount($@)"
-        [[ "$1" == "/home/mychroot/dev/shm" ]] && return 128
+        [[ "$@" == "--force /home/mychroot/dev/shm" ]] && return 128
         return 0
     }
     UMOUNT=umount
     echo -e "1 /home/mychroot/dev\n1 /home/mychroot/proc/fs1\n1 /home/mychroot\n1 /home/mychroot-no/dev\n1 /home/mychroot/dev/shm\n1 /home/mychroot/proc\n" > ./mounts
     MOUNTS_FILE=./mounts
     CHROOTDIR=/home/mychroot assertCommandFailOnStatus 128 chroot_teardown
-    assertEquals "$(echo -e "umount(/home/mychroot/proc/fs1)
-umount(/home/mychroot/proc)
-umount(/home/mychroot/dev/shm)
-umount(/home/mychroot/dev)
-umount(/home/mychroot)")" "$(cat $STDOUTF)"
+    assertEquals "$(echo -e "umount(--force /home/mychroot/proc/fs1)
+umount(--force /home/mychroot/proc)
+umount(--force /home/mychroot/dev/shm)
+umount(--force /home/mychroot/dev)
+umount(--force /home/mychroot)")" "$(cat $STDOUTF)"
 }
 function test_groot_with_chroot_teardown_with_trailing_slash(){
     echo -e "1 /home/mychroot/dev\n1 /home/mychroot/proc/fs1\n1 /home/mychroot\n1 /home/mychroot-no/dev\n1 /home/mychroot/dev/shm\n1 /home/mychroot/proc\n" > ./mounts
     MOUNTS_FILE=./mounts
     CHROOTDIR=/home/mychroot assertCommandSuccess chroot_teardown
-    assertEquals "$(echo -e "umount(/home/mychroot/proc/fs1)
-umount(/home/mychroot/proc)
-umount(/home/mychroot/dev/shm)
-umount(/home/mychroot/dev)
-umount(/home/mychroot)")" "$(cat $STDOUTF)"
+    assertEquals "$(echo -e "umount(--force /home/mychroot/proc/fs1)
+umount(--force /home/mychroot/proc)
+umount(--force /home/mychroot/dev/shm)
+umount(--force /home/mychroot/dev)
+umount(--force /home/mychroot)")" "$(cat $STDOUTF)"
 }
 function test_groot_with_chroot_teardown_mountpoint_failure(){
     is_mountpoint() {
@@ -181,10 +181,10 @@ function test_groot_with_chroot_teardown_mountpoint_failure(){
     echo -e "1 /home/mychroot/dev\n1 /home/mychroot/proc/fs1\n1 /home/mychroot\n1 /home/mychroot-no/dev\n1 /home/mychroot/dev/shm\n1 /home/mychroot/proc\n" > ./mounts
     MOUNTS_FILE=./mounts
     CHROOTDIR=/home/mychroot assertCommandSuccess chroot_teardown
-    assertEquals "$(echo -e "umount(/home/mychroot/proc/fs1)
-umount(/home/mychroot/proc)
-umount(/home/mychroot/dev)
-umount(/home/mychroot)")" "$(cat $STDOUTF)"
+    assertEquals "$(echo -e "umount(--force /home/mychroot/proc/fs1)
+umount(--force /home/mychroot/proc)
+umount(--force /home/mychroot/dev)
+umount(--force /home/mychroot)")" "$(cat $STDOUTF)"
 }
 
 function test_groot_with_rbind(){
