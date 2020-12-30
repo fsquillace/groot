@@ -3,7 +3,6 @@
 # This script is the simplified and portable version of arch-chroot
 # (https://wiki.archlinux.org/index.php/Change_root#Using_arch-chroot)
 #
-
 set -e
 
 NAME='GRoot'
